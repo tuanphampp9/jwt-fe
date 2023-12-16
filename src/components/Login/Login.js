@@ -21,6 +21,7 @@ const Login = () => {
             toast.success(res.data.EM);
             sessionStorage.setItem('account', JSON.stringify({ isAuthenticate: true, token: 'fake token' }))
             navigate('/manage-users')
+            window.location.reload();
         }
     }
     return (
@@ -41,7 +42,12 @@ const Login = () => {
                             onChange={(e) => setValueLogin(e.target.value)} />
                         <input type='password' className='form-control' placeholder='Password'
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)} />
+                            onChange={(e) => setPassword(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleLogin();
+                                }
+                            }} />
                         {error && <h3 style={{ color: 'red', fontStyle: 'italic', fontSize: '14px' }}>{error}</h3>}
                         <button className='btn btn-primary' onClick={() => handleLogin()}>Log in</button>
                         <a href='afda' className='text-center'>Forgotten password?</a>
