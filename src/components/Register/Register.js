@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './Register.scss'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify'

@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import './Users.scss'
 import { getListUserWithPaginate } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
+import ModalDelete from '../Modal/ModalDelete';
+import ModalUser from '../Modal/ModalUser';
 const Users = () => {
     const [listUser, setListUser] = useState([]);
-    // const [totalRows, setTotalRows] = useState(0);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
+    const [openModalUser, setOpenModalUser] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
-    const limit = 4;
+    const [type, setType] = useState('create');
+    const [infoUser, setInfoUser] = useState('');
+    const limit = 3;
     useEffect(() => {
         fetchAllUser(1, limit);
     }, [])
@@ -14,7 +19,6 @@ const Users = () => {
         const res = await getListUserWithPaginate(page, limit);
         if (res.data && res.data.EC === 0) {
             setListUser(res.data.DT.listUser);
-            // setTotalRows(res.data.totalRows);
             setTotalPages(res.data.DT.totalPages);
         }
     }
@@ -28,7 +32,10 @@ const Users = () => {
                 <h3>Table Users</h3>
                 <div className='acion-btn'>
                     <button className='btn btn-success' onClick={() => window.location.reload()}>Refresh</button>
-                    <button className='btn btn-primary'>Add new user</button>
+                    <button className='btn btn-primary' onClick={() => {
+                        setOpenModalUser(true)
+                        setType('create')
+                    }}>Add new user</button>
                 </div>
             </div>
             <div className='user-body'>
@@ -52,8 +59,16 @@ const Users = () => {
                                 <td>{user.display_name}</td>
                                 <td>{user.group.name}</td>
                                 <td>
-                                    <button className='btn btn-warning mx-2'>Update</button>
-                                    <button className='btn btn-danger'>Delete</button>
+                                    <button className='btn btn-warning mx-2' onClick={() => {
+                                        setOpenModalUser(true);
+                                        setType('update')
+                                        setInfoUser(user);
+                                    }}>Update</button>
+                                    <button className='btn btn-danger' onClick={() => {
+                                        setOpenModalDelete(true)
+                                        setInfoUser(user)
+                                    }
+                                    }>Delete</button>
                                 </td>
                             </tr>
                         })}
@@ -83,6 +98,8 @@ const Users = () => {
                     renderOnZeroPageCount={null}
                 />
             </div>
+            {openModalDelete && <ModalDelete open={openModalDelete} setOpen={setOpenModalDelete} infoUser={infoUser} />}
+            {openModalUser && <ModalUser open={openModalUser} setOpen={setOpenModalUser} type={type} infoUser={infoUser} />}
         </div>
     )
 }
