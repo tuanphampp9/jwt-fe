@@ -33,12 +33,12 @@ const ModalUser = (props) => {
                 .email("Invalid email format")
                 .required("Required!"),
             display_name: Yup.string()
-                .min(2, 'Username have to bigger two characters')
+                .min(2, 'Username must be at least two characters')
                 .required('Required!'),
             phone: Yup.string()
                 .matches(/^[0-9]{10}$/, 'Invalid phone number')
                 .required('Phone number is required'),
-            password: Yup.string()
+            password: type === 'create' && Yup.string()
                 .min(8, "Minimum 8 characters")
                 .required("Required!")
         }),
@@ -47,8 +47,8 @@ const ModalUser = (props) => {
             if (type === 'create') {
                 res = await createNewUser(values);
             } else {
-                const { display_name, password, gender, address, groupId } = values
-                res = await updateInfoUser({ display_name, password, gender, address, groupId }, infoUser.id)
+                const { display_name, gender, address, groupId } = values
+                res = await updateInfoUser({ display_name, gender, address, groupId }, infoUser.id)
             }
             if (res && res.data.EC === 0) {
                 toast.success(res.data.EM);
@@ -91,11 +91,11 @@ const ModalUser = (props) => {
                             <input type='text' className='form-control' placeholder='Phone' name='phone' value={formik.values.phone} onChange={formik.handleChange} />
                             {formik.errors.phone && formik.touched.phone && <p className='check-error'>{formik.errors.phone}</p>}
                         </div>}
-                        <div className={type === 'create' ? 'col-sm-6' : 'col-sm-12'}>
+                        {type === 'create' && <div className={type === 'create' ? 'col-sm-6' : 'col-sm-12'}>
                             <label>Password: </label>
                             <input type='password' className='form-control' placeholder='Password' name='password' value={formik.values.password} onChange={formik.handleChange} />
                             {formik.errors.password && formik.touched.password && <p className='check-error'>{formik.errors.password}</p>}
-                        </div>
+                        </div>}
                     </div>
                     <div className='row'>
                         <div className='col-sm-12'>

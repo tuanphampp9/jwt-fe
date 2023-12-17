@@ -1,8 +1,8 @@
 
 
-import axios from 'axios'
+import axios from '../setup/CustomAxios'
 const getListGroup = () => {
-    return axios.get('http://localhost:8080/api/v1/group/get-list-group');
+    return axios.get('/api/v1/group/get-list-group');
 }
 
 export { getListGroup }

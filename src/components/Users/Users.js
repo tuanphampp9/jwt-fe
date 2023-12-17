@@ -31,11 +31,11 @@ const Users = () => {
             <div className='user-header'>
                 <h3>Table Users</h3>
                 <div className='acion-btn'>
-                    <button className='btn btn-success' onClick={() => window.location.reload()}>Refresh</button>
+                    <button className='btn btn-success' onClick={() => window.location.reload()}><i className="fa fa-refresh"></i>Refresh</button>
                     <button className='btn btn-primary' onClick={() => {
                         setOpenModalUser(true)
                         setType('create')
-                    }}>Add new user</button>
+                    }}><i className="fa fa-plus"></i>Add new user</button>
                 </div>
             </div>
             <div className='user-body'>
@@ -63,12 +63,12 @@ const Users = () => {
                                         setOpenModalUser(true);
                                         setType('update')
                                         setInfoUser(user);
-                                    }}>Update</button>
+                                    }}><i className="fa fa-pencil"></i></button>
                                     <button className='btn btn-danger' onClick={() => {
                                         setOpenModalDelete(true)
                                         setInfoUser(user)
                                     }
-                                    }>Delete</button>
+                                    }><i className="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                         })}
