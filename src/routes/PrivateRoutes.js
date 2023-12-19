@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Outlet, Navigate } from 'react-router-dom'
+import { UserContext } from "../context/UserContext";
 const PrivateRoutes = (props) => {
-    let auth = sessionStorage.getItem('account');
-    return auth ? <Outlet /> : <Navigate to="/login" />
+    const { user } = useContext(UserContext);
+    console.log(user);
+    return user.token ? <Outlet /> : <Navigate to="/login" />
 
 }
 

@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Users.scss'
 import { getListUserWithPaginate } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
 import ModalDelete from '../Modal/ModalDelete';
 import ModalUser from '../Modal/ModalUser';
+import { UserContext } from '../../context/UserContext';
 const Users = () => {
+    const { user } = React.useContext(UserContext)
+    console.log('info user: ', user);
     const [listUser, setListUser] = useState([]);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalUser, setOpenModalUser] = useState(false);

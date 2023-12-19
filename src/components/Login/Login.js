@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Login.scss'
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/userService';
 import { toast } from 'react-toastify'
+import { UserContext } from '../../context/UserContext';
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useContext(UserContext);
     const [valueLogin, setValueLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState('');
@@ -13,15 +15,14 @@ const Login = () => {
             setError('Bạn chưa nhập tài khoản hoặc mật khẩu');
         } else {
             setError('')
-            console.log('hello login ne');
             const res = await loginUser(valueLogin, password);
             if (res.data.EC === 1) {
                 return setError(res.data.EM);
             }
             toast.success(res.data.EM);
-            sessionStorage.setItem('account', JSON.stringify({ isAuthenticate: true, token: 'fake token' }))
+            // sessionStorage.setItem('account', JSON.stringify({ isAuthenticated: true, token: res.data.DT.access_token }))
+            login({ isAuthenticated: true, token: res.data.DT.access_token })
             navigate('/manage-users')
-            window.location.reload();
         }
     }
     return (
