@@ -20,7 +20,6 @@ const Login = () => {
                 return setError(res.data.EM);
             }
             toast.success(res.data.EM);
-            // sessionStorage.setItem('account', JSON.stringify({ isAuthenticated: true, token: res.data.DT.access_token }))
             login({ isAuthenticated: true, token: res.data.DT.access_token })
             navigate('/manage-users')
         }
