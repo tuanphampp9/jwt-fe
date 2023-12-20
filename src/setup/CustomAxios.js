@@ -6,7 +6,9 @@ const instance = axios.create({
 
 //set credentials
 instance.defaults.withCredentials = true;
-//   instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
+//setup token
+instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent

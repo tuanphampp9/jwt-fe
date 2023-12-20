@@ -20,7 +20,8 @@ const Login = () => {
                 return setError(res.data.EM);
             }
             toast.success(res.data.EM);
-            login({ isAuthenticated: true, token: res.data.DT.access_token })
+            localStorage.setItem('token', res.data.DT.access_token)
+            login({ isAuthenticated: true, token: res.data.DT.access_token, isLoading: false })
             navigate('/manage-users')
         }
     }

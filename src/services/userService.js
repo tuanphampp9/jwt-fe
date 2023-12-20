@@ -29,4 +29,8 @@ const updateInfoUser = (infoUpdate, userId) => {
 const deleteUser = (userId) => {
     return axios.delete(`/api/v1/user/delete/${userId}`)
 }
-export { registerNewUser, loginUser, getAllUsers, getListUserWithPaginate, createNewUser, updateInfoUser, deleteUser }
+
+const getMe = () => {
+    return axios.get('/api/v1/account')
+}
+export { registerNewUser, loginUser, getAllUsers, getListUserWithPaginate, createNewUser, updateInfoUser, deleteUser, getMe }
