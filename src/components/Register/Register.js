@@ -33,7 +33,6 @@ const Register = () => {
                 .required("Required!")
         }),
         onSubmit: async (values) => {
-            console.log(values);
             const dataRegister = { email: values.email, display_name: values.username, phone: values.phone, password: values.password };
             const res = await registerNewUser(dataRegister);
             if (res.status === 200) {

@@ -4,10 +4,7 @@ import { getListUserWithPaginate } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
 import ModalDelete from '../Modal/ModalDelete';
 import ModalUser from '../Modal/ModalUser';
-import { UserContext } from '../../context/UserContext';
 const Users = () => {
-    const { user } = React.useContext(UserContext)
-    console.log('info user: ', user);
     const [listUser, setListUser] = useState([]);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalUser, setOpenModalUser] = useState(false);
@@ -27,7 +24,6 @@ const Users = () => {
     }
     const handlePageClick = (e) => {
         fetchAllUser(e.selected + 1, limit);
-        console.log(e.selected)
     }
     return (
         <div className='container'>

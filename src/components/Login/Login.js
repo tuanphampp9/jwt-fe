@@ -21,7 +21,7 @@ const Login = () => {
             }
             toast.success(res.data.EM);
             localStorage.setItem('token', res.data.DT.access_token)
-            login({ isAuthenticated: true, token: res.data.DT.access_token, isLoading: false })
+            login({ isAuthenticated: true, token: res.data.DT.access_token, display_name: res.data.DT.display_name, isLoading: false })
             navigate('/manage-users')
         }
     }

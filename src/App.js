@@ -1,11 +1,11 @@
 import './App.scss'
-import Nav from './components/Navigation/Nav';
+import NavHeader from './components/Navigation/NavHeader';
 import {
   BrowserRouter
 } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { UserContext } from './context/UserContext';
 function App() {
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className='app-header'>{user.token && <Nav />}</div>
+        <div className='app-header'>{user.token && <NavHeader />}</div>
         <div className="App">
           <AppRoutes />
           <ToastContainer

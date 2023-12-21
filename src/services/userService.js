@@ -10,6 +10,10 @@ const loginUser = (valueLogin, password) => {
     })
 }
 
+const logoutUser = () => {
+    return axios.post('/api/v1/logout')
+}
+
 const getAllUsers = () => {
     return axios.get('/api/v1/user/getListUser')
 }
@@ -33,4 +37,4 @@ const deleteUser = (userId) => {
 const getMe = () => {
     return axios.get('/api/v1/account')
 }
-export { registerNewUser, loginUser, getAllUsers, getListUserWithPaginate, createNewUser, updateInfoUser, deleteUser, getMe }
+export { registerNewUser, loginUser, getAllUsers, getListUserWithPaginate, createNewUser, updateInfoUser, deleteUser, getMe, logoutUser }
